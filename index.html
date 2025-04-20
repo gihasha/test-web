@@ -1,120 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WhatsApp Pair Spammer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPAM SENDER</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
+      padding: 0;
+      background-image: url('https://i.ibb.co/FqmCZHV2/IMG-20250402-WA0051.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Courier New', Courier, monospace;
+      color: #00ffea;
+      overflow: hidden;
+    }
+
+    #intro {
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 4px solid;
+      width: 0;
+      animation: typing 3s steps(30, end), blink .75s step-end infinite;
+      margin: 50px auto;
+      text-align: center;
+      color: #00fff2;
+      text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 20ch }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #00fff2 }
+    }
+
+    #access-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
     }
 
-    .box {
-      background: #222;
+    #access-box {
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 0 10px #000;
+      box-shadow: 0 0 15px #00fff2;
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
     }
 
     input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
+      width: 250px;
+      background: #111;
+      color: #00ffb7;
+      box-shadow: 0 0 8px #00ffb7;
     }
 
     button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background-color: #00c853;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
+      background: #00ff9d;
+      color: #000;
       cursor: pointer;
+      box-shadow: 0 0 8px #00ff9d;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #00e676;
+      background: #00ff59;
+      box-shadow: 0 0 10px #00ff59;
+    }
+
+    .slide-text {
+      animation: slideText 5s linear infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+      color: #ff00f2;
+      text-shadow: 0 0 10px #ff00f2;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    @keyframes slideText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     #log {
       margin-top: 20px;
       max-height: 300px;
       overflow-y: auto;
-      background: #1b1b1b;
-      padding: 10px;
-      border-radius: 5px;
-      font-family: monospace;
-      font-size: 14px;
+      font-size: 1rem;
+      text-shadow: 0 0 5px #00ffea;
     }
 
-    .log-line {
-      margin: 4px 0;
-      color: #9be7ff;
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #00ffea;
+      text-shadow: 0 0 5px #00ffea;
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>WhatsApp Spam Sender</h2>
-    <input type="text" id="number" placeholder="Enter WhatsApp number e.g. +9476XXXXXXX" />
-    <input type="number" id="count" placeholder="Enter Spam Count e.g. 20" />
-    <button id="send">Send</button>
+  <div id="intro">𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</div>
+
+  <div id="access-container">
+    <div id="access-box">
+      <h2>𝗘𝗻𝘁𝗲𝗿 𝗔𝗰𝗰𝗲𝘀 𝗞𝗲𝘆</h2>
+      <input type="text" id="access-key" placeholder="Enter your key">
+      <button onclick="checkKey()">𝚂𝚄𝙱𝙼𝙸𝚃</button>
+      <button id="buy-btn" style="display:none" onclick="window.open('https://wa.me/+94760105256?text=_*𝙷𝙸+𝙰𝙽𝙹𝙰𝙽𝙰+𝙱𝚄𝚈+𝚂𝙿𝙰𝙼+𝙰𝙲𝙴𝚂𝚂+𝙺𝙴𝚈🍃🕊️*_')">𝙱𝚄𝚈 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈</button>
+    </div>
+  </div>
+
+  <div id="main-app" style="display:none; text-align: center; padding: 20px;">
+    <div class="slide-text">>>> Spam Sender <<<</div>
+    <input id="phone" type="text" placeholder="ENTER WHATSAPP NUMBER"><br>
+    <input id="amount" type="number" placeholder="ENTER SPAM COUNT"><br>
+    <button onclick="startSpam()">𝚂𝙴𝙽𝙳 𝚂𝙿𝙰𝙼</button>
     <div id="log"></div>
   </div>
 
+  <div class="footer">𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙱𝚈 𝙺𝙸𝙽𝙶 𝙰𝙽𝙹𝙰𝙽𝙰</div>
+
   <script>
-    const sendBtn = document.getElementById("send");
-    const logDiv = document.getElementById("log");
-
-    sendBtn.addEventListener("click", async () => {
-      const number = document.getElementById("number").value.trim();
-      const count = parseInt(document.getElementById("count").value.trim());
-
-      if (!number || number.length < 10 || isNaN(count) || count < 1) {
-        alert("Please enter valid number and spam count.");
-        return;
+    function checkKey() {
+      const key = document.getElementById('access-key').value.trim();
+      if (key === "𝙰𝙽𝙹𝙰𝙽𝙰-20070418") {
+        document.getElementById('access-container').style.display = "none";
+        document.getElementById('main-app').style.display = "block";
+      } else {
+        document.getElementById('buy-btn').style.display = "inline-block";
       }
+    }
 
-      logDiv.innerHTML = "";
-
-      let sent = 0;
-
-      const spam = async () => {
-        if (sent >= count) return;
-        try {
-          await fetch(`https://asitha.top/anunge-reddawal-hoyanna-epa-utto-awajathaka-ponnayek-wenna-epa/?num=${number.replace(/\D/g, '')}`);
-          const line = document.createElement("div");
-          line.className = "log-line";
-          line.textContent = `spam sent by: ${number}`;
-          logDiv.appendChild(line);
-          logDiv.scrollTop = logDiv.scrollHeight;
-        } catch (e) {
-          console.error("Failed to send");
-        }
-        sent++;
-        setTimeout(spam, 125); // ~8 per second
-      };
-
-      spam();
-    });
+    async function startSpam() {
+      const number = document.getElementById('phone').value;
+      const count = parseInt(document.getElementById('amount').value);
+      const log = document.getElementById('log');
+      log.innerHTML = '';
+      for (let i = 1; i <= count; i++) {
+        log.innerHTML += `<div style="color: #39ff14; text-shadow: 0 0 5px #39ff14;">Spam send by ${number}</div>`;
+        await fetch(`https://asitha.top/anunge-reddawal-hoyanna-epa-utto-awajathaka-ponnayek-wenna-epa/?num=${number}`);
+        await new Promise(res => setTimeout(res, 125)); // ~8 per second (1000/125ms)
+      }
+      log.innerHTML += `<div style="color: #007fff; text-shadow: 0 0 5px #007fff;">𝚂𝙿𝙰𝙼𝙼𝙴𝚁 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙱𝚈 𝙺𝙸𝙽𝙶 𝙰𝙽𝙹𝙰𝙽𝙰 𝙱𝙱𝙷</div>`;
+      setTimeout(() => log.innerHTML += '<br><b style="color: #00ff9d;">𝚂𝙿𝙰𝙼 𝚂𝙴𝙽𝙳 𝚂𝚄𝙲𝙲𝙴𝚂</b>', 5000);
+    }
   </script>
 </body>
 </html>
