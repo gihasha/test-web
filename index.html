@@ -1,17 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>WhatsApp Pair Code</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Pair Code Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(#001f00, #000000);
+      font-family: 'Segoe UI', sans-serif;
+      color: #00ff88;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .logo {
+      width: 100px;
+      margin-top: 40px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 10px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 250px;
+      font-size: 1rem;
+      margin-top: 20px;
+      outline: none;
+      text-align: center;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(45deg, #00ff00, #00cc88, #00ffcc);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 10px #00ff88, 0 0 40px #00ff88;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ff88, 0 0 60px #00ff88;
+    }
+
+    .code-box {
+      margin-top: 30px;
+      background: #00ff8844;
+      border: 2px dashed #00ff88;
+      border-radius: 10px;
+      padding: 20px;
+      display: inline-block;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .code-box:hover {
+      background: #00ffaa66;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.9rem;
+      color: #00ff88;
+    }
+  </style>
 </head>
 <body>
-  <h2>Link WhatsApp</h2>
-  <input type="text" id="phone" placeholder="Enter phone number" />
-  <button onclick="pair()">Generate Pair</button>
-  <div id="output"></div>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="logo" alt="WhatsApp Logo" />
+
+  <h1>Enter Phone Number</h1>
+  <input type="text" id="phone" placeholder="e.g. 94771234567" />
+  <br />
+  <button class="btn" onclick="generateCode()">Generate Code</button>
+
+  <div id="pairCodeDisplay"></div>
+
+  <div class="footer">Created by Dasun Max</div>
 
   <script>
-    async function pair() {
-      const phone = document.getElementById("phone").value;
+    async function generateCode() {
+      const phone = document.getElementById("phone").value.trim();
+      if (!phone) return alert("Enter a valid phone number");
+
       const res = await fetch("http://localhost:3000/pair", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -19,16 +110,26 @@
       });
 
       const data = await res.json();
-      const output = document.getElementById("output");
+      const pairBox = document.getElementById("pairCodeDisplay");
 
-      if (data.type === "pair") {
-        output.innerHTML = `<h3>Pair Code: ${data.pairingCode}</h3>`;
-      } else if (data.type === "qr") {
-        output.innerHTML = `<img src="${data.qrImage}" width="200" />`;
+      if (data.pairingCode) {
+        pairBox.innerHTML = `
+          <div class="code-box" onclick="copyToClipboard('${data.pairingCode}')">
+            <h2>Pair Code:</h2>
+            <h1>${data.pairingCode}</h1>
+            <small>(Click to copy)</small>
+          </div>
+        `;
       } else {
-        output.innerText = "Error or waiting...";
+        pairBox.innerHTML = `<p>Waiting for pairing code...</p>`;
       }
     }
+
+    function copyToClipboard(code) {
+      navigator.clipboard.writeText(code);
+      alert("Pair code copied to clipboard!");
+    }
   </script>
+
 </body>
 </html>
