@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+    
     body {
       margin: 0;
       padding: 0;
@@ -12,22 +14,38 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Electrolize', sans-serif;
       color: #00ffea;
       overflow: hidden;
       text-align: center;
+      transition: all 0.5s;
+    }
+
+    #intro-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
     }
 
     #intro {
-      font-size: 3rem;
+      font-size: 2rem;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 4px solid;
+      border-right: 4px solid #00ffea;
       width: 0;
-      animation: typing 3s steps(30, end), blink .75s step-end infinite;
-      margin: 100px auto 50px;
+      animation: typing 2s steps(30, end), blink .75s step-end infinite;
       color: #00fff2;
-      text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2, 0 0 30px #00fff2;
+      text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2;
+      margin-bottom: 20px;
     }
 
     @keyframes typing {
@@ -41,11 +59,17 @@
     }
 
     #access-container {
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 60vh;
+      height: 100vh;
+      animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
     }
 
     #access-box {
@@ -55,7 +79,7 @@
       box-shadow: 0 0 20px #00fff2;
       border: 2px solid #00fff2;
       width: 350px;
-      margin: 0 auto;
+      backdrop-filter: blur(5px);
     }
 
     input, button {
@@ -70,6 +94,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      font-family: 'Electrolize', sans-serif;
     }
 
     input {
@@ -78,6 +103,12 @@
       box-shadow: 0 0 15px #00ffb7;
       border: 1px solid #00ffb7;
       text-align: center;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      box-shadow: 0 0 20px #00ffb7;
+      transform: scale(1.02);
     }
 
     button {
@@ -85,7 +116,7 @@
       color: #000;
       cursor: pointer;
       box-shadow: 0 0 15px #00ff9d;
-      transition: 0.3s;
+      transition: all 0.3s;
     }
 
     button:hover {
@@ -100,12 +131,26 @@
       max-width: 500px;
       margin: 0 auto;
       padding: 20px;
+      animation: slideIn 0.5s forwards;
     }
 
     #phone, #amount {
       width: 80%;
       margin: 15px auto;
       text-align: center;
+    }
+
+    #spam-title {
+      color: #ff00f2;
+      text-shadow: 0 0 10px #ff00f2, 0 0 20px #ff00f2;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff00f2; }
+      to { text-shadow: 0 0 15px #ff00f2, 0 0 30px #ff00f2; }
     }
 
     #log {
@@ -119,17 +164,6 @@
       border-radius: 10px;
       border: 1px solid #00ffea;
       display: none;
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 1rem;
-      color: #00ffea;
-      font-family: Arial, sans-serif;
-      text-shadow: none;
     }
 
     .buy-btn {
@@ -160,6 +194,7 @@
       text-shadow: 0 0 5px #ff0000;
       font-size: 1.2rem;
       max-width: 80%;
+      backdrop-filter: blur(5px);
     }
 
     .error-popup button {
@@ -179,22 +214,78 @@
       font-size: 1.5rem;
       margin: 20px 0;
       display: none;
+      animation: glowSuccess 2s infinite alternate;
+    }
+
+    @keyframes glowSuccess {
+      from { text-shadow: 0 0 5px #00ff00; }
+      to { text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00; }
     }
 
     .powered-by {
-      color: #007fff;
-      font-size: 1rem;
-      margin: 20px 0;
-      font-family: Arial, sans-serif;
       position: fixed;
       bottom: 20px;
       width: 100%;
       text-align: center;
+      font-size: 1rem;
+      color: #007fff;
+      text-shadow: 0 0 5px #007fff;
+      font-family: 'Electrolize', sans-serif;
+      display: none;
+      animation: glowPowered 2s infinite alternate;
+    }
+
+    @keyframes glowPowered {
+      from { text-shadow: 0 0 5px #007fff; }
+      to { text-shadow: 0 0 15px #007fff, 0 0 30px #007fff; }
+    }
+
+    #sound-control {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      cursor: pointer;
+      font-size: 24px;
+      color: #00ffea;
+      text-shadow: 0 0 5px #00ffea;
+      transition: all 0.3s;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #00ffea;
+      box-shadow: 0 0 10px #00ffea;
+    }
+
+    #sound-control.muted {
+      color: #ff0000;
+      border-color: #ff0000;
+      box-shadow: 0 0 10px #ff0000;
+    }
+
+    #sound-control.muted::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      height: 2px;
+      background: #ff0000;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      box-shadow: 0 0 5px #ff0000;
     }
   </style>
 </head>
 <body>
-  <div id="intro">𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</div>
+  <div id="sound-control">🔊</div>
+
+  <div id="intro-container">
+    <div id="intro">𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</div>
+  </div>
 
   <div id="access-container">
     <div id="access-box">
@@ -212,6 +303,7 @@
   </div>
 
   <div id="main-app">
+    <div id="spam-title">𝙎𝙋𝘼𝙈 𝙎𝙀𝙉𝘿𝙀𝙍</div>
     <input id="phone" type="text" placeholder="ENTER WHATSAPP NUMBER">
     <input id="amount" type="number" placeholder="ENTER SPAM COUNT">
     <button onclick="startSpam()">𝚂𝙴𝙽𝙳 𝚂𝙿𝙰𝙼</button>
@@ -219,10 +311,68 @@
     <div id="success-message" class="success-message"></div>
   </div>
 
-  <div class="footer">Powered By King Anjana</div>
-  <div id="powered-by" class="powered-by"></div>
+  <div class="powered-by">ρσωєяє∂ ву кιηg αηנαηα</div>
+
+  <audio id="bg-music" loop>
+    <source src="https://jmp.sh/s/pKzT1kKbGXMbxWjZ0T3M" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
+    // Enhanced Music Control
+    const music = document.getElementById('bg-music');
+    const soundControl = document.getElementById('sound-control');
+    let isMuted = false;
+
+    // Set volume to 30% by default to prevent loud playback
+    music.volume = 0.3;
+
+    // Improved sound control with better visual feedback
+    soundControl.addEventListener('click', () => {
+      isMuted = !isMuted;
+      if (isMuted) {
+        music.pause();
+        soundControl.classList.add('muted');
+        soundControl.innerHTML = '🔇';
+      } else {
+        music.play()
+          .then(() => {
+            soundControl.classList.remove('muted');
+            soundControl.innerHTML = '🔊';
+          })
+          .catch(e => console.error("Audio playback failed:", e));
+      }
+    });
+
+    // Auto-play with user interaction
+    const enableAudio = () => {
+      document.body.removeEventListener('click', enableAudio);
+      document.body.removeEventListener('keydown', enableAudio);
+      
+      // Try to play audio
+      music.play()
+        .then(() => {
+          soundControl.classList.remove('muted');
+          soundControl.innerHTML = '🔊';
+        })
+        .catch(e => {
+          console.log("Auto-play prevented, waiting for user interaction");
+          soundControl.classList.add('muted');
+          soundControl.innerHTML = '🔇';
+          isMuted = true;
+        });
+    };
+
+    // Listen for both click and keypress events
+    document.body.addEventListener('click', enableAudio);
+    document.body.addEventListener('keydown', enableAudio);
+
+    // Show intro first, then access container
+    setTimeout(() => {
+      document.getElementById('intro-container').style.display = 'none';
+      document.getElementById('access-container').style.display = 'flex';
+    }, 2000); // Shorter duration
+
     // Check access key and show the main app
     function checkKey() {
       const key = document.getElementById('access-key').value.trim();
@@ -245,7 +395,7 @@
       const count = parseInt(document.getElementById('amount').value);
       const log = document.getElementById('log');
       const successMsg = document.getElementById('success-message');
-      const poweredBy = document.getElementById('powered-by');
+      const poweredBy = document.querySelector('.powered-by');
       
       log.innerHTML = '';
       successMsg.style.display = "none";
@@ -262,10 +412,36 @@
         log.style.display = "none";
         successMsg.innerHTML = "𝚂𝙿𝙰𝙼 𝚂𝙴𝙽𝙳 𝚂𝚄𝙲𝙲𝙴𝚂𝚂𝙵𝚄𝙻𝙻𝚈!";
         successMsg.style.display = "block";
-        poweredBy.innerHTML = "Powered By King Anjana";
-        poweredBy.style.display = "block";
+        
+        setTimeout(() => {
+          successMsg.style.display = "none";
+          poweredBy.style.display = "block";
+          
+          setTimeout(() => {
+            poweredBy.style.display = "none";
+            successMsg.style.display = "block";
+          }, 2000);
+        }, 2000);
       }, 1000);
     }
+
+    // Tab switching animation
+    let isSwitching = false;
+    
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && !isSwitching) {
+        isSwitching = true;
+        document.body.style.transform = 'translateX(-100%)';
+        document.body.style.opacity = '0';
+      } else if (!document.hidden && isSwitching) {
+        document.body.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          document.body.style.transform = 'translateX(0)';
+          document.body.style.opacity = '1';
+          isSwitching = false;
+        }, 50);
+      }
+    });
   </script>
 </body>
-</html>
+  </html>
