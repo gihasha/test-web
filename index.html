@@ -1,200 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANJANA SPAM SENDER</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Courier New', monospace;
-    }
-    body {
-      background-color: #000;
-      color: #00fff2;
+      background-image: url('https://i.ibb.co/FqmCZHV2/IMG-20250402-WA0051.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Courier New', Courier, monospace;
+      color: #00ffea;
       overflow: hidden;
-      transition: background 0.5s, color 0.5s;
+      text-align: center;
     }
-    .centered {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-    .typing {
-      font-size: 2rem;
+
+    #intro {
+      font-size: 3rem;
       white-space: nowrap;
       overflow: hidden;
       border-right: 4px solid;
       width: 0;
-      animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
-      text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2;
+      animation: typing 3s steps(30, end), blink .75s step-end infinite;
+      margin: 100px auto 50px;
+      color: #00fff2;
+      text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2, 0 0 30px #00fff2;
     }
+
     @keyframes typing {
-      from { width: 0; }
-      to { width: 30ch; }
+      from { width: 0 }
+      to { width: 20ch }
     }
+
     @keyframes blink {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: #00fff2; }
+      from, to { border-color: transparent }
+      50% { border-color: #00fff2 }
     }
-    #access-page, #main-app, #final-message {
-      display: none;
+
+    #access-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 60vh;
     }
-    .box {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00fff2;
+
+    #access-box {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00fff2;
+      border: 2px solid #00fff2;
+      width: 350px;
+      margin: 0 auto;
+    }
+
+    input, button {
+      padding: 12px;
+      margin: 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      width: 80%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input {
+      background: rgba(0, 0, 0, 0.7);
+      color: #00ffb7;
+      box-shadow: 0 0 15px #00ffb7;
+      border: 1px solid #00ffb7;
       text-align: center;
     }
-    input, button {
-      margin: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      outline: none;
-    }
-    input {
-      background: #111;
-      color: #00ffb7;
-      box-shadow: 0 0 8px #00ffb7;
-    }
+
     button {
       background: #00ff9d;
       color: #000;
-      box-shadow: 0 0 8px #00ff9d;
       cursor: pointer;
+      box-shadow: 0 0 15px #00ff9d;
+      transition: 0.3s;
     }
+
     button:hover {
       background: #00ff59;
-      box-shadow: 0 0 10px #00ff59;
+      box-shadow: 0 0 20px #00ff59;
+      transform: scale(1.05);
     }
-    .slide-heading {
-      font-size: 1.5rem;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: slideText 10s linear infinite, typewriter 4s steps(20) 1;
-      color: #ff00f2;
-      text-shadow: 0 0 10px #ff00f2;
+
+    #main-app {
+      display: none;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
     }
-    @keyframes slideText {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+
+    #phone, #amount {
+      width: 80%;
+      margin: 15px auto;
+      text-align: center;
     }
+
     #log {
-      max-height: 250px;
+      margin-top: 20px;
+      max-height: 300px;
       overflow-y: auto;
-      margin-top: 20px;
-      color: #39ff14;
-      text-shadow: 0 0 5px #39ff14;
+      font-size: 1.1rem;
+      text-shadow: 0 0 8px #00ffea;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      border: 1px solid #00ffea;
+      display: none;
     }
-    #success {
-      font-size: 1.3rem;
-      color: #00ff9d;
-      text-shadow: 0 0 8px #00ff9d;
-      margin-top: 20px;
-    }
-    #powered {
-      color: #007fff;
-      text-shadow: 0 0 8px #007fff;
+
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
       font-size: 1rem;
-      margin-top: 10px;
+      color: #00ffea;
+      font-family: Arial, sans-serif;
+      text-shadow: none;
     }
-    #dark-toggle {
-      position: absolute;
-      top: 15px;
-      left: 15px;
+
+    .buy-btn {
+      display: none;
+      background: #ff0000 !important;
+      box-shadow: 0 0 15px #ff0000 !important;
+    }
+
+    .buy-btn:hover {
+      background: #ff3333 !important;
+      box-shadow: 0 0 20px #ff3333 !important;
+    }
+
+    .error-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 2px solid #ff0000;
+      box-shadow: 0 0 20px #ff0000;
+      padding: 30px;
+      border-radius: 15px;
+      z-index: 1000;
+      text-align: center;
+      color: #ff0000;
+      text-shadow: 0 0 5px #ff0000;
+      font-size: 1.2rem;
+      max-width: 80%;
+    }
+
+    .error-popup button {
+      background: #ff0000;
+      box-shadow: 0 0 10px #ff0000;
+      margin-top: 20px;
+    }
+
+    .error-popup button:hover {
+      background: #ff3333;
+      box-shadow: 0 0 15px #ff3333;
+    }
+
+    .success-message {
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00;
       font-size: 1.5rem;
-      cursor: pointer;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .powered-by {
+      color: #007fff;
+      font-size: 1rem;
+      margin: 20px 0;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div id="dark-toggle">❤️</div>
+  <div id="intro">𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</div>
 
-  <div id="splash" class="centered">
-    <div class="typing">𝗞𝗜𝗡𝗚 𝗔𝗡𝗝𝗔𝗡𝗔 𝗕𝗕𝗛</div>
-  </div>
-
-  <div id="access-page" class="centered">
-    <div class="box">
-      <h2>Enter Access Key</h2>
-      <input type="text" id="key" placeholder="Access Key">
-      <br>
-      <button onclick="checkAccess()">SUBMIT</button>
-      <button onclick="window.open('https://wa.me/+94760105256?text=Buy+Access+Key')">Buy Key</button>
+  <div id="access-container">
+    <div id="access-box">
+      <h2 style="color: #00fff2; text-shadow: 0 0 10px #00fff2;">𝗘𝗻𝘁𝗲𝗿 𝗔𝗰𝗰𝗲𝘀𝘀 𝗞𝗲𝘆</h2>
+      <input type="text" id="access-key" placeholder="Enter your key">
+      <button onclick="checkKey()">𝚂𝚄𝙱𝙼𝙸𝚃</button>
+      <button class="buy-btn" onclick="window.open('https://wa.me/+94760105256?text=▸𝙃𝙚𝙮+𝘼𝙣𝙟𝙖𝙣𝙖+𝘽𝙪𝙮+𝘼𝙘𝙘𝙚𝙨+𝙆𝙚𝙮','_blank')">𝙱𝚄𝚈 𝙰𝙲𝙲𝙴𝚂𝚂 𝙺𝙴𝚈</button>
     </div>
   </div>
 
-  <div id="main-app" class="centered">
-    <div class="slide-heading">𝘼𝙉𝙅𝘼𝙉𝘼 𝙎𝙋𝘼𝙈 𝙎𝙀𝙉𝘿𝙀𝙍</div>
-    <input id="phone" placeholder="ENTER WHATSAPP NUMBER">
-    <input id="count" type="number" placeholder="ENTER SPAM COUNT">
-    <button onclick="startSpam()">SEND SPAM</button>
-    <div id="log"></div>
-    <div id="success"></div>
+  <div id="error-popup" class="error-popup">
+    <h2>IMPORTANT!</h2>
+    <p>You Entered Access Key Went Wrong, Please Buy Access Key Using Below Button</p>
+    <button onclick="closeError()">OK</button>
   </div>
 
-  <div id="final-message" class="centered">
-    <div id="powered">𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 𝙆𝙄𝙉𝙂 𝘼𝙉𝙅𝘼𝙉𝘼</div>
+  <div id="main-app">
+    <input id="phone" type="text" placeholder="ENTER WHATSAPP NUMBER">
+    <input id="amount" type="number" placeholder="ENTER SPAM COUNT">
+    <button onclick="startSpam()">𝚂𝙴𝙽𝙳 𝚂𝙿𝙰𝙼</button>
+    <div id="log"></div>
+    <div id="success-message" class="success-message"></div>
   </div>
+
+  <div class="footer">Powered By King Anjana</div>
+  <div id="powered-by" class="powered-by"></div>
 
   <script>
-    const splash = document.getElementById('splash');
-    const accessPage = document.getElementById('access-page');
-    const mainApp = document.getElementById('main-app');
-    const finalMessage = document.getElementById('final-message');
-    const log = document.getElementById('log');
-    const success = document.getElementById('success');
-
-    setTimeout(() => {
-      splash.style.display = 'none';
-      accessPage.style.display = 'flex';
-    }, 4000);
-
-    function checkAccess() {
-      const key = document.getElementById('key').value.trim();
-      if (key === "𝒰𝒳𝒶𝒰𝒳𝒚-20070418") {
-        accessPage.style.display = 'none';
-        mainApp.style.display = 'flex';
+    // Check access key and show the main app
+    function checkKey() {
+      const key = document.getElementById('access-key').value.trim();
+      if (key === "ANJANA-20070418") {
+        document.getElementById('access-container').style.display = "none";
+        document.getElementById('main-app').style.display = "block";
+      } else {
+        document.querySelector('.buy-btn').style.display = "inline-block";
+        document.getElementById('error-popup').style.display = "block";
       }
     }
+    
+    function closeError() {
+      document.getElementById('error-popup').style.display = "none";
+    }
 
+    // Start spam sending process
     async function startSpam() {
       const number = document.getElementById('phone').value;
-      const count = parseInt(document.getElementById('count').value);
+      const count = parseInt(document.getElementById('amount').value);
+      const log = document.getElementById('log');
+      const successMsg = document.getElementById('success-message');
+      const poweredBy = document.getElementById('powered-by');
+      
       log.innerHTML = '';
-      success.innerHTML = '';
-
+      successMsg.style.display = "none";
+      poweredBy.style.display = "none";
+      log.style.display = "block";
+      
       for (let i = 1; i <= count; i++) {
-        log.innerHTML += `<div>Spam send by ${number}</div>`;
+        log.innerHTML += `<div style="color: #39ff14; text-shadow: 0 0 8px #39ff14;">Spam send to ${number} (${i}/${count})</div>`;
         await fetch(`https://asitha.top/anunge-reddawal-hoyanna-epa-utto-awajathaka-ponnayek-wenna-epa/?num=${number}`);
-        await new Promise(r => setTimeout(r, 125));
+        await new Promise(res => setTimeout(res, 125));
       }
-
-      success.innerHTML = '𝙎𝙋𝘼𝙈 𝙎𝙀𝙉𝘿 𝙎𝙐𝘾𝘾𝙀𝙎𝙁𝙐𝙇𝙇𝙔';
-
+      
       setTimeout(() => {
-        mainApp.style.display = 'none';
-        finalMessage.style.display = 'flex';
-      }, 5000);
+        log.style.display = "none";
+        successMsg.innerHTML = "𝚂𝙿𝙰𝙼 𝚂𝙴𝙽𝙳 𝚂𝚄𝙲𝙲𝙴𝚂𝚂𝙵𝚄𝙻𝙻𝚈!";
+        successMsg.style.display = "block";
+        poweredBy.innerHTML = "Powered By King Anjana";
+        poweredBy.style.display = "block";
+      }, 1000);
     }
-
-    document.getElementById('dark-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      if (document.body.classList.contains('dark')) {
-        document.body.style.background = '#fff';
-        document.body.style.color = '#000';
-      } else {
-        document.body.style.background = '#000';
-        document.body.style.color = '#00fff2';
-      }
-    });
   </script>
 </body>
 </html>
